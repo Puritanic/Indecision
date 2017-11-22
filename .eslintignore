@@ -9,3 +9,4 @@
 /scripts/**
 test.js
 !.eslintrc.js
+./src/registerServiceWorker.js
