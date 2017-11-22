@@ -6,13 +6,26 @@ import Options from './components/Options';
 import AddOption from './components/AddOption';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            options: ['Walk a dog', 'Study', 'Read', 'Code', 'Eat', 'Sleep']
+        };
+    }
+
+    handleDeleteOptions = () => {
+        this.setState(() => ({ options: [] }));
+    }
+
     render() {
-        const options = ['Walk a dog', 'Study', 'Read', 'Code', 'Eat', 'Sleep'];
         return (
             <div>
                 <Header title="Indecision!" subtitle="Put your lives in the hands of the computer!" />
-                <Action />
-                <Options options={options} />
+                <Action hasOptions={this.state.options.length > 0} />
+                <Options
+                    options={this.state.options}
+                    handleDeleteOptions={this.handleDeleteOptions}
+                />
                 <AddOption />
             </div>
         );
