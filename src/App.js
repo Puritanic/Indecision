@@ -35,7 +35,10 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Header title="Indecision!" subtitle="Put your lives in the hands of the computer!" />
+                <Header
+                    title="Indecision!"
+                    subtitle="Put your lives in the hands of the computer!"
+                />
                 <Action
                     hasOptions={this.state.options.length > 0}
                     handlePick={this.handlePick}
