@@ -8,5 +8,10 @@ const Header = props =>
             <h2>{ props.subtitle }</h2>
         </div>
     );
+// Default properties for the component
+Header.defaultProps = {
+    title: 'Indecision!',
+    subtitle: 'Put your lives in the hands of the computer!'
+};
 
 export default Header;

@@ -1,17 +1,43 @@
 import React, { Component } from 'react';
-import './App.css';
-import { random } from './helpers';
+import './App.scss';
 import Header from './components/Header';
 import Action from './components/Action';
 import Options from './components/Options';
 import AddOption from './components/AddOption';
+import OptionModal from './components/OptionModal';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            options: []
+            options: [],
+            selected: undefined
         };
+    }
+
+    componentDidMount() {
+        // Handle possible errors with try catch
+        try {
+            // get options from local storage
+            const options = JSON.parse(localStorage.getItem('options'));
+            console.log({ 'Component did mount': options });
+            if (options) {
+                this.setState(() => ({ options }));
+            }
+        } catch (error) {
+            console.info(error);
+        }
+    }
+    componentDidUpdate(prevProps, prevState) {
+        // Don't run this if data doesn't change
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+            console.log('component did update');
+        }
+    }
+    componentWillUnmount() {
+        console.log('Component unmounted');
     }
 
     handleAddOption = (option) => {
@@ -22,23 +48,32 @@ class App extends Component {
         const options = [...this.state.options];
         options.push(option);
         this.setState(() => ({ options }));
-    }
+    };
 
     handleDeleteOptions = () => {
         this.setState(() => ({ options: [] }));
     };
 
+    handleDeleteOption = (option) => {
+        this.setState(prevState => ({
+            options: prevState
+                .options
+                .filter(opt => option !== opt)
+        }));
+    };
+
     handlePick = () => {
-        console.log(random(this.state.options));
+        this.setState(() => ({ selected: true }));
+    };
+
+    handleModalClose = () => {
+        this.setState(() => ({ selected: undefined }));
     };
 
     render() {
         return (
             <div>
-                <Header
-                    title="Indecision!"
-                    subtitle="Put your lives in the hands of the computer!"
-                />
+                <Header />
                 <Action
                     hasOptions={this.state.options.length > 0}
                     handlePick={this.handlePick}
@@ -46,9 +81,13 @@ class App extends Component {
                 <Options
                     options={this.state.options}
                     handleDeleteOptions={this.handleDeleteOptions}
+                    handleDeleteOption={this.handleDeleteOption}
                 />
-                <AddOption
-                    handleAddOption={this.handleAddOption}
+                <AddOption handleAddOption={this.handleAddOption} />
+                <OptionModal
+                    selected={this.state.selected}
+                    options={this.state.options}
+                    closeModal={this.handleModalClose}
                 />
             </div>
         );
@@ -56,4 +95,3 @@ class App extends Component {
 }
 
 export default App;
-
