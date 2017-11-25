@@ -1,0 +1,30 @@
+// BEM
+.button {
+    border: none;
+    outline: none;
+    color: aliceblue;
+    font-weight: 500;
+    padding: $small-size;
+    background: $bright-purple;
+    border-bottom: .2rem solid darken($bright-purple, 10%);
+
+    &--big {
+        width: 100%;    
+        font-weight: bold;
+        padding: $large-size 0;
+        font-size: $large-size;
+        margin-bottom: $largest-size;
+        border-bottom: .6rem solid darken($bright-purple, 10%);
+    }
+
+    &--link {
+        background: none;
+        border: none;
+        color: $off-white;
+        padding: 0;
+    }
+
+    &:disabled {
+        opacity: .5;
+    }
+}

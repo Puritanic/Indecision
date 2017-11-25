@@ -3,9 +3,12 @@ import Option from './Option';
 
 const Options = props => (
     <div>
-        {props.options.length === 0 && <p>You are without options right now :/</p>}
-        { props.options.map(option => <Option key={option} option_text={option} handleDeleteOption={props.handleDeleteOption} />) }
-        <button onClick={props.handleDeleteOptions}>Remove all</button>
+        <div className="widget--header">
+            <h3>Your Options</h3>
+            <button className="button button--link" onClick={props.handleDeleteOptions}>Remove all</button>
+        </div>
+        {props.options.length === 0 && <p className="option">You are without options right now :/</p>}
+        { props.options.map((option, index) => <Option count={index + 1} key={option} option_text={option} handleDeleteOption={props.handleDeleteOption} />) }
     </div>
 );
 

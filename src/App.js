@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './App.scss';
+import 'normalize.css/normalize.css';
+import './styles/App.scss';
+import { random } from './helpers';
 import Header from './components/Header';
 import Action from './components/Action';
 import Options from './components/Options';
@@ -43,7 +45,7 @@ class App extends Component {
     handleAddOption = (option) => {
         // Check if new task is not already in tasks array
         if (this.state.options.indexOf(option) !== -1) {
-            return 'That task is already on the list';
+            return <p className="option">That task is already on the list</p>;
         }
         const options = [...this.state.options];
         options.push(option);
@@ -63,7 +65,10 @@ class App extends Component {
     };
 
     handlePick = () => {
-        this.setState(() => ({ selected: true }));
+        const option = random(this.state.options);
+        this.setState(() => ({
+            selected: option
+        }));
     };
 
     handleModalClose = () => {
@@ -74,19 +79,22 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                <Action
-                    hasOptions={this.state.options.length > 0}
-                    handlePick={this.handlePick}
-                />
-                <Options
-                    options={this.state.options}
-                    handleDeleteOptions={this.handleDeleteOptions}
-                    handleDeleteOption={this.handleDeleteOption}
-                />
-                <AddOption handleAddOption={this.handleAddOption} />
+                <div className="container">
+                    <Action
+                        hasOptions={this.state.options.length > 0}
+                        handlePick={this.handlePick}
+                    />
+                    <div className="widget">
+                        <Options
+                            options={this.state.options}
+                            handleDeleteOptions={this.handleDeleteOptions}
+                            handleDeleteOption={this.handleDeleteOption}
+                        />
+                        <AddOption handleAddOption={this.handleAddOption} />
+                    </div>
+                </div>
                 <OptionModal
                     selected={this.state.selected}
-                    options={this.state.options}
                     closeModal={this.handleModalClose}
                 />
             </div>

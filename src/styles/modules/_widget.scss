@@ -1,0 +1,17 @@
+.widget {
+    background: $light-blue;
+    text-align: center;
+    color: $off-white;
+    &--header {
+        background: $blue;
+        color: $off-white;
+        padding: $medium-size;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        & h3 {
+            margin: 0;
+        }
+    }
+}
