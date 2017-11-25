@@ -1,0 +1,29 @@
+.form {
+    display: flex;
+    border-bottom: 1rem solid darken($light-blue, 10%);
+    padding: $medium-size;
+    
+    &__input {
+        color: $off-white;
+        background: $blue;
+        border: none;
+        border-bottom: 3px solid darken($color: $light-blue, $amount: 10%);
+        outline: none;
+        text-align: center;
+        flex-grow: 1;
+        margin-right: $small-size;
+    }
+}
+
+@media (max-width: 45rem) {
+    .form {
+        padding: $small-size;    
+        flex-direction: column;
+        &__input {
+            border-bottom: none;
+            margin: 0;
+            margin-bottom: 1rem;
+            height: 3rem;
+        }
+    }
+}

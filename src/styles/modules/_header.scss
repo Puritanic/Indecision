@@ -1,0 +1,18 @@
+.header {
+    background: $off-black;
+    color: aliceblue;
+    margin-bottom: $largest-size;
+    padding: $medium-size 0;
+
+    &__title {
+        font-size: $large-size;
+        margin: 0;
+    }
+
+    &__subtitle {
+        font-size: $medium-size;
+        color: $off-white;
+        font-weight: 500;
+        margin: 0;
+    }
+}

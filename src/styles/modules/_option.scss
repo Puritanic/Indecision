@@ -1,0 +1,13 @@
+.option {
+    padding: $medium-size;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    border-bottom: .3px solid lighten($light-blue, 10%);
+    border-bottom-width: 80%;
+
+    &__text {
+        color: lighten($off-white, 20%);
+        word-break: break-all;
+    }
+}
